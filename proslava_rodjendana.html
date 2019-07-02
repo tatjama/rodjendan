@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Proslava rodjendana</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        #omotac {
+            text-align: center;
+            margin: 120px;
+            background-image: url(baloni.jpg);
+            /*background-repeat: no-repeat;*/
+            background-repeat: repeat-y;
+        }
+        
+        ul li {
+            display: inline-block;
+        }
+        
+        li a,
+        button {
+            border: black;
+            padding: 10px;
+            background-color: orangered;
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 300px;
+        }
+        
+        #ispis {
+            color: orangered;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="omotac">
+
+        <ul>
+            <li><a href="#">o nama</a></li>
+            <li><a href="#">ponuda</a></li>
+            <li><a href="#">galerija</a></li>
+            <li><a href="#">kontakt</a></li>
+        </ul>
+        <h1>PROSLAVA ROĐENDANA</h1>
+
+        <form>
+            <input type="number" id="brojsati" placeholder="Unesite trajanje rodjendana u satima" min="1" max="6"><br><br>
+            <input type="number" id="brojdece" placeholder="Unesite broj dece najmanje 10" min="10" max="60"><br><br>
+            <input type="number" id="brojodraslih" placeholder="Unesite broj odraslih najmanje 10" min="10" max="40"><br><br>
+            <input type="checkbox" id="ketering" checked>Ketering <br><br>
+            <button type="button" onclick="obracunCene(brojsati, brojdece, brojodraslih, ketering)">Izracunaj cenu</button>
+        </form>
+        <h2>CENA PROSLAVE ROĐENDANA ZA </h2>
+        <ul>
+            <li>BROJ DECE: <span id="ispisdece"></span> </li><br>
+
+            <li>BROJ ODRASLIH: <span id="ispisodrasli"></span> </li><br>
+            <li>TRAJANJE PROSLAVE: <span id="sati"></span> </li><br>
+            <li>KETERING <span id="dodatno"></span> </li>
+        </ul>
+        <h2 id="ispis">_________</h2>
+
+    </div>
+    <script>
+        function obracunCene(brojsati = 2, brojdece = 10, brojodraslih = 5, ketering = 0) {
+            brojsati = document.getElementById('brojsati').value;
+            brojdece = document.getElementById('brojdece').value;
+            brojodraslih = document.getElementById('brojodraslih').value;
+            ketering = document.getElementById('ketering').checked;
+
+            if (ketering) {
+                ketering = 0;
+                document.getElementById('dodatno').innerHTML = 'JE URAČUNAT U CENU!';
+            } else {
+                ketering = 1;
+                document.getElementById('dodatno').innerHTML = 'NIJE URAČUNAT U CENU!';
+            }
+
+            cena = ((brojsati * 0.5 * brojdece + brojsati * 0.7 * brojodraslih) * 150 - brojodraslih * 20 * ketering) +
+                '  DINARA';
+
+            document.getElementById('ispisdece').innerHTML = brojdece;
+            document.getElementById('ispisodrasli').innerHTML = brojodraslih;
+            document.getElementById('sati').innerHTML = brojsati + "  SATI";
+            ispis = document.getElementById('ispis');
+            ispis.innerHTML = cena;
+        }
+    </script>
+</body>
+
+</html>
